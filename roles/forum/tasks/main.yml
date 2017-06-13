@@ -1,0 +1,7 @@
+# file: roles/forum/tasks/main.yml
+---
+- include: apt.yml
+- include: docker.yml
+  tags: docker
+- include: config.yml
+  tags: config

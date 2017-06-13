@@ -1,3 +1,24 @@
-# file: site.yml
 ---
-# - include: example_role.yml
+
+- name: dependency provisioning
+  hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: false
+  tasks:
+    - name: install python2
+      raw: sudo apt-get -y install python-simplejson
+
+
+- hosts: balkanio-servers
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - config.yml
+
+  roles:
+    - nginx
+    - role: forum
+      tags: forum

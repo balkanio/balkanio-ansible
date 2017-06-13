@@ -1,0 +1,22 @@
+---
+- name: docker | Docker GPG key present
+  apt_key:
+    id: 0EBFCD88
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: docker | Docker APT repo available
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+    state: present
+
+- name: docker | Docker CE installed
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+
+- name: docker | Docker started
+  service:
+    name: docker
+    state: started

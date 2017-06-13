@@ -1,0 +1,13 @@
+- apt_repository:
+    repo: 'ppa:certbot/certbot'
+
+- name: apt-get update
+  apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: install apt packages
+  apt: name={{ item }} state=latest
+  with_items:
+   - nginx
+   - letsencrypt

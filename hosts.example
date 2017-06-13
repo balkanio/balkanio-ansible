@@ -1,0 +1,2 @@
+[balkanio-servers]
+balkan ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_host=x.x.x.x letsencrypt_email=admin@example.com domain_name=balkan.io domain_name2=forum.balkan.io

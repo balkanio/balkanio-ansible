@@ -1,0 +1,45 @@
+---
+- name: create letsencrypt directory
+  file: name=/var/www/letsencrypt state=directory
+
+- name: config | Remove default nginx config
+  file: name=/etc/nginx/sites-enabled/default state=absent
+
+- name: config | Install nginx site for letsencrypt requests
+  template:
+    src: templates/nginx-http
+    dest: /etc/nginx/sites-available/http
+- name: config | symlink http
+  file: src=/etc/nginx/sites-available/http dest=/etc/nginx/sites-enabled/http state=link
+
+- name: config | Reload nginx to activate letsencrypt site
+  service: name=nginx state=restarted
+
+- name: config | Create letsencrypt certificate
+  shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} -d {{ domain_name2 }}
+  args:
+    creates: /etc/letsencrypt/live/{{ domain_name }}
+
+- name: config | Generate dhparams
+  shell: openssl dhparam -out /etc/nginx/dhparams.pem 2048
+  args:
+    creates: /etc/nginx/dhparams.pem
+
+- name: config | Install nginx site for specified site
+  template:
+    src: templates/nginx-le
+    dest: /etc/nginx/sites-available/le
+- name: config | symlink le
+  file: src=/etc/nginx/sites-available/le dest=/etc/nginx/sites-enabled/le state=link
+
+- name: config | Reload nginx to activate specified site
+  service: name=nginx state=restarted
+
+- name: config | Add letsencrypt cronjob for cert renewal
+  cron:
+    name: letsencrypt_renewal
+    special_time: weekly
+    job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} -d {{ domain_name2 }} && service nginx reload
+
+# - name: config | Copy discourse.conf file
+#   template: src=discourse.conf dest=/etc/nginx/conf.d/discourse.conf

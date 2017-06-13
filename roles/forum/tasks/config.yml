@@ -1,0 +1,3 @@
+---
+- name: config_error | Copy error page
+  template: src=obnova.html dest=/var/www/html/obnova.html
