@@ -3,5 +3,7 @@
 - include: apt.yml
 - include: docker.yml
   tags: docker
-- include: config.yml
-  tags: config
+- include: swap.yml
+  tags: swap
+- include: discourse.yml
+  tags: discourse

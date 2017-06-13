@@ -65,3 +65,5 @@ target/
 *.retry
 venv
 hosts
+host_vars/*
+!host_vars/example

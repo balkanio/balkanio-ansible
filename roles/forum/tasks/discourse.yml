@@ -1,0 +1,16 @@
+---
+- name: discourse | Copy error page
+  template: src=obnova.html dest=/var/www/html/obnova.html
+
+- name: Discourse checked out
+  git:
+    repo: https://github.com/discourse/discourse_docker.git
+    dest: /var/discourse
+
+- name: discourse | Generate app.yml
+  template:
+    src: app.yml
+    dest: /var/discourse/containers/app.yml
+
+- name: discourse | Rebuild Discourse app
+  command: /var/discourse/launcher rebuild app

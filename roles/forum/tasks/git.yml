@@ -1,4 +1,0 @@
-- name: git | Clone Lets Encrypt
-  git:
-    repo: https://github.com/letsencrypt/letsencrypt
-    dest: "{{ letsencrypt_source }}"

@@ -1,0 +1,18 @@
+letsencrypt_email: admin@example.com
+domain_name: example.com
+domain_name2: forum.example.com
+
+discourse_email: admin@example.com
+discourse_hostname: forum.example.com
+
+DISCOURSE_SMTP_ADDRESS: smtp.sendgrid.net
+DISCOURSE_SMTP_PORT: 587
+DISCOURSE_SMTP_USER_NAME: insertyouruser
+DISCOURSE_SMTP_PASSWORD: insertyourpassword
+DISCOURSE_SMTP_ENABLE_START_TLS: true
+
+# swap
+swap_path: /swapfile
+dd_bs_size_mb: 1
+swap_count: 2048
+swappiness: 10
