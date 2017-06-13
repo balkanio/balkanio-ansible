@@ -7,3 +7,5 @@
   tags: swap
 - include: discourse.yml
   tags: discourse
+- include: nginx-discourse.yml
+  tags: nginx-discourse

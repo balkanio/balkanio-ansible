@@ -1,0 +1,8 @@
+- name: nginx-discourse | Copy discourse.conf file
+  template: src=discourse dest=/etc/nginx/sites-available/discourse
+
+- name: nginx-discourse | symlink discourse
+  file: src=/etc/nginx/sites-available/discourse dest=/etc/nginx/sites-enabled/discourse state=link
+
+- name: config | Reload nginx to activate Discourse forwarding
+  service: name=nginx state=restarted

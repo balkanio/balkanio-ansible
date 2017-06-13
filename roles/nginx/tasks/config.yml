@@ -29,8 +29,8 @@
   template:
     src: templates/nginx-le
     dest: /etc/nginx/sites-available/le
-- name: config | symlink le
-  file: src=/etc/nginx/sites-available/le dest=/etc/nginx/sites-enabled/le state=link
+# - name: config | symlink le
+#   file: src=/etc/nginx/sites-available/le dest=/etc/nginx/sites-enabled/le state=link
 
 - name: config | Reload nginx to activate specified site
   service: name=nginx state=restarted
@@ -39,7 +39,5 @@
   cron:
     name: letsencrypt_renewal
     special_time: weekly
-    job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} -d {{ domain_name2 }} && service nginx reload
-
-# - name: config | Copy discourse.conf file
-#   template: src=discourse.conf dest=/etc/nginx/conf.d/discourse.conf
+    job: letsencrypt renew && service nginx reload
+    #job: letsencrypt renew --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos && service nginx reload
