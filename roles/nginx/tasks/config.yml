@@ -25,9 +25,14 @@
   args:
     creates: /etc/nginx/dhparams.pem
 
+- name: config | common ssl settings
+  template:
+    src: ssl
+    dest: /etc/nginx/ssl
+
 - name: config | Install nginx site for specified site
   template:
-    src: templates/nginx-le
+    src: nginx-le
     dest: /etc/nginx/sites-available/le
 # - name: config | symlink le
 #   file: src=/etc/nginx/sites-available/le dest=/etc/nginx/sites-enabled/le state=link
