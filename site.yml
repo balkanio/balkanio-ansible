@@ -19,6 +19,7 @@
     - config.yml
 
   roles:
-    - nginx
+    - role: nginx
+      tags: nginx
     - role: forum
       tags: forum

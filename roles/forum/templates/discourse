@@ -1,7 +1,13 @@
 add_header X-Frame-Options SAMEORIGIN;
 add_header X-Content-Type-Options nosniff;
-add_header X-XSS-Protection "1; mode=block";
-add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; object-src 'none'";
+
+
+# maybe enable this based on:
+# https://gist.github.com/plentz/6737338
+# https://meta.discourse.org/t/how-to-configure-content-security-policy/53308
+
+# add_header X-XSS-Protection "1; mode=block";
+# add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'none'; object-src 'none'";
 
 # HTTPS server
 #

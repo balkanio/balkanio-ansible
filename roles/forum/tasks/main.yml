@@ -8,4 +8,4 @@
 - include: discourse.yml
   tags: discourse
 - include: nginx-discourse.yml
-  tags: nginx-discourse
+  tags: nginx
