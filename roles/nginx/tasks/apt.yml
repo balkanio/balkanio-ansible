@@ -7,7 +7,6 @@
     update_cache: yes
 
 - name: install apt packages
-  apt: name={{ item }} state=latest
-  with_items:
-   - nginx
-   - letsencrypt
+  apt:
+    name: ['nginx', 'letsencrypt']
+    state: latest
